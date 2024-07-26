@@ -1,0 +1,17 @@
+name: Test Application
+run-name: Test Application ⛑️
+on: [pull_request]
+jobs: 
+    TestApplicationJob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Setup Node Environment
+              uses: actions/setup-node@v4
+              with:
+                node-version: '20.13.1'
+            - name: Install Dependencies
+              run: npm install
+            - name: Run Tests
+              run: npm test
