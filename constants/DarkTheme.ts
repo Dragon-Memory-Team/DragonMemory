@@ -2,9 +2,9 @@ import Colors from "./Colors";
 import { Theme } from "./Theme";
 
 const DarkTheme: Theme =  {
-    accent: Colors.red,
-    backgound: Colors.darker,
-    foreground: Colors.white
+    accent: Colors.darkblue,
+    backgound: Colors.lightblue,
+    foreground: Colors.black
 }
 
 export default DarkTheme;
