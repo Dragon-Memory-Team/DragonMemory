@@ -31,6 +31,8 @@ jobs:
     EasBuild:
         needs: [BuildCredentiatedApp]
         runs-on: ubuntu-latest
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         steps:
             - name: Download Credentiaded Application Zip
               uses: actions/download-artifact@v4
