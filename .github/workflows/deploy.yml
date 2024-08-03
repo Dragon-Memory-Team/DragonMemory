@@ -3,7 +3,7 @@ run-name: Deploy to Internal Test 📱
 on: 
     workflow_dispatch: 
 jobs:
-    BuildApplication:
+    BuildCredentiatedApp:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -22,5 +22,16 @@ jobs:
                 repository: Dragon-Memory-Team/DragonMemoy-App-Configs
                 token: ${{ secrets.PAT }}
                 path: settings
-            - name: Show all
-              run: ls
+            - name: Remove placeholder settings
+              run: rm ./source/eas.json ./source/credentials.json
+            - name: Copy the correct settings
+              run: cp -r ./settings/android ./source && cp ./settings/credentials.json ./source && cp ./settings/eas.json ./source
+            - name: Zip source code
+              run: zip -r DragonMemoryCredentiaded.zip ./source
+            - name: 'Upload Source Code with real credentials'
+              uses: actions/upload-artifact@v4
+              with:
+                name: DragonMemoryCredentiated
+                path: ./DragonMemoryCredentiaded.zip
+                retention-days: 1
+
