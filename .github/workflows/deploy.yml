@@ -14,8 +14,6 @@ jobs:
               uses: actions/setup-node@v4
               with:
                 node-version: '20.13.1'
-            - name: Install Dependencies
-              run: npm install
             - name: Install EASFirst section to
               run: npm install --global eas-cli
             - name: Checkout configuration Repository
