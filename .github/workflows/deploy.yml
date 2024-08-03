@@ -43,7 +43,7 @@ jobs:
               with:
                 node-version: '20.13.1'
             - name: Install Node Dependencies
-              working-directory: ./DragonMemoryCredentiaded
+              working-directory: source
               run: npm install
             - name: Install EAS Cli Tool
               run: npm install --global eas-cli
