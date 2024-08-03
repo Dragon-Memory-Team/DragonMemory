@@ -29,6 +29,7 @@ jobs:
                 path: ./DragonMemoryCredentiaded.zip
                 retention-days: 1
     EasBuild:
+        needs: [BuildCredentiatedApp]
         runs-on: ubuntu-latest
         steps:
             - name: Download Credentiaded Application Zip
