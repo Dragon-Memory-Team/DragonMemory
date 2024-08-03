@@ -8,18 +8,21 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
+              with:
+                path: 'source'
             - name: Setup Node Environment
               uses: actions/setup-node@v4
               with:
                 node-version: '20.13.1'
             - name: Install Dependencies
               run: npm install
-            - name: Install EAS
+            - name: Install EASFirst section to
               run: npm install --global eas-cli
             - name: Checkout configuration Repository
               uses: actions/checkout@v4
               with:
                 repository: Dragon-Memory-Team/DragonMemoy-App-Configs
                 token: ${{ secrets.PAT }}
+                path: settings
             - name: Show all
               run: ls
