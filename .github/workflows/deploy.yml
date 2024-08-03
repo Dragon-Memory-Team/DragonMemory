@@ -51,4 +51,10 @@ jobs:
               run: npm install --global eas-cli
             - name: EAS Build
               working-directory: source
-              run: echo $(eas build -p android | awk '/🤖 Android app:/ {getline; print $1}')
+              run: wget -o DragonMemory.aab $(eas build -p android | awk '/🤖 Android app:/ {getline; print $1}')
+            - name: 'Upload AAB'
+              uses: actions/upload-artifact@v4
+              with:
+                name: DragonMemory
+                path: ./source/DragonMemory.aab
+                retention-days: 1
