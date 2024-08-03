@@ -49,3 +49,5 @@ jobs:
               run: npm install
             - name: Install EAS Cli Tool
               run: npm install --global eas-cli
+            - name: EAS Build
+              run: eas build -p android --local
