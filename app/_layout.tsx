@@ -1,7 +1,7 @@
 import ApplicationContextProvider from '@/components/providers/ApplicationContextProvider';
 import useRubikFont from '@/hooks/useRubikFont';
 import useTheme from '@/hooks/useTheme';
-import { Slot, SplashScreen, Stack } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootSiblingParent } from 'react-native-root-siblings';
