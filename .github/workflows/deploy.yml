@@ -86,5 +86,5 @@ jobs:
             with:
               serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_PATH }}
               packageName: "br.com.dragonmemory"
-              releaseFiles: ./${{ needs.EasBuild.outputs.FILENAME }}
+              releaseFiles: ./*.aab
               track: internal
