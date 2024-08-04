@@ -66,10 +66,16 @@ jobs:
             uses: actions/download-artifact@v4
             with:
               name: DragonMemory
+          - name: Checkout configuration Repository
+            uses: actions/checkout@v4
+            with:
+              repository: Dragon-Memory-Team/DragonMemoy-App-Configs
+              token: ${{ secrets.PAT }}
+              path: settings
           - name: Upload to Internal Test Track
             uses: r0adkll/upload-google-play@v1
             with:
-              serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_CREDENTIALS }}
+              serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_PATH }}
               packageName: "br.com.dragonmemory"
               releaseFiles: ./DragonMemory.aab
               track: qa
