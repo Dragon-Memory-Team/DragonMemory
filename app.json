@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "br.com.dragonmemory"
+      "package": "br.com.dragonmemory",
+      "versionCode": 2
     },
     "web": {
       "bundler": "metro",
