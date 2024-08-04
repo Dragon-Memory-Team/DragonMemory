@@ -49,15 +49,15 @@ jobs:
               run: npm install
             - name: Install EAS Cli Tool
               run: npm install --global eas-cli
-            - name: Changing the version of the app.
-              working-directory: source
-              run: |
-                version=$(jq .expo.version ./app.json | sed 's/^"\(.*\)"$/\1/')
-                IFS='.' read -r MAJOR MINOR PATCH <<< "$version"
-                PATCH=$((PATCH + 1))
-                new_version="$MAJOR.$MINOR.$PATCH"
-                jq --arg new_version "$new_version" '.expo.version = $new_version' app.json > temp.json && mv temp.json app.json
-                echo "Updated version to $new_version"
+            # - name: Changing the version of the app.
+            #   working-directory: source
+            #   run: |
+            #     version=$(jq .expo.version ./app.json | sed 's/^"\(.*\)"$/\1/')
+            #     IFS='.' read -r MAJOR MINOR PATCH <<< "$version"
+            #     PATCH=$((PATCH + 1))
+            #     new_version="$MAJOR.$MINOR.$PATCH"
+            #     jq --arg new_version "$new_version" '.expo.version = $new_version' app.json > temp.json && mv temp.json app.json
+            #     echo "Updated version to $new_version"
             - name: EAS Build
               working-directory: source
               run: |
