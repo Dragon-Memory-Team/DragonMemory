@@ -51,12 +51,19 @@ jobs:
               run: npm install --global eas-cli
             - name: EAS Build
               working-directory: source
-              run: wget -o DragonMemory.aab $(eas build -p android | awk '/🤖 Android app:/ {getline; print $1}')
+              run: |
+                echo "Building Android Application through EAS"
+                EAS_DOWNLOAD_URL=$(eas build -p android | awk '/🤖 Android app:/ {getline; print $1}')
+                echo "Url to download app $EAS_DOWNLOAD_URL"
+                FILENAME=$(basename $EAS_DOWNLOAD_URL)
+                wget "$EAS_DOWNLOAD_URL"
+                echo "FILENAME=$FILENAME" >> $GITHUB_OUTPUT
+                zip DragonMemoryApp.zip ./$FILENAME
             - name: 'Upload AAB'
               uses: actions/upload-artifact@v4
               with:
                 name: DragonMemory
-                path: ./source/DragonMemory.aab
+                path: ./source/DragonMemoryApp.zip
                 retention-days: 1
     DeployToInternalTest:
         needs: [EasBuild]
@@ -73,11 +80,11 @@ jobs:
               token: ${{ secrets.PAT }}
               path: settings
           - name: Unzip AAB
-            run: unzip ./DragonMemory.zip
+            run: unzip ./DragonMemoryApp.zip
           - name: Upload to Internal Test Track
             uses: r0adkll/upload-google-play@v1
             with:
               serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_PATH }}
               packageName: "br.com.dragonmemory"
-              releaseFiles: ./DragonMemory.aab
+              releaseFiles: ./${{ needs.EasBuild.outputs.FILENAME }}
               track: internal
