@@ -49,6 +49,15 @@ jobs:
               run: npm install
             - name: Install EAS Cli Tool
               run: npm install --global eas-cli
+            - name: Changing the version of the app.
+              working-directory: source
+              run: |
+                version=$(jq .expo.version ./app.json | sed 's/^"\(.*\)"$/\1/')
+                IFS='.' read -r MAJOR MINOR PATCH <<< "$version"
+                PATCH=$((PATCH + 1))
+                new_version="$MAJOR.$MINOR.$PATCH"
+                jq --arg new_version "$new_version" '.expo.version = $new_version' app.json > temp.json && mv temp.json app.json
+                echo "Updated version to $new_version"
             - name: EAS Build
               working-directory: source
               run: |
@@ -59,6 +68,11 @@ jobs:
                 wget "$EAS_DOWNLOAD_URL"
                 echo "FILENAME=$FILENAME" >> $GITHUB_OUTPUT
                 zip DragonMemoryApp.zip ./$FILENAME
+            - name: Commit version change
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                commit_message: Increment app version
+                file_pattern: 'app.json'
             - name: 'Upload AAB'
               uses: actions/upload-artifact@v4
               with:
