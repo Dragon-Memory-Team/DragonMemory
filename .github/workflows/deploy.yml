@@ -78,4 +78,4 @@ jobs:
               serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_PATH }}
               packageName: "br.com.dragonmemory"
               releaseFiles: ./DragonMemory.aab
-              track: qa
+              track: internal
