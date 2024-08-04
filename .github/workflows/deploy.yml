@@ -97,3 +97,4 @@ jobs:
               packageName: "br.com.dragonmemory"
               releaseFiles: ./*.aab
               track: internal
+              status: draft
